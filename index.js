@@ -14,11 +14,7 @@ const dev = app.get("env") !== "production";
 
 if (!dev) {
   app.disable("x-powered-by");
-  app.use(
-    cors({
-      origin: ["https://why-is-coin.herokuapp.com"],
-    })
-  );
+  app.use(cors());
 } else {
   app.use(
     cors({
