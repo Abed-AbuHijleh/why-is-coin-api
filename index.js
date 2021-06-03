@@ -15,9 +15,6 @@ const dev = app.get("env") !== "production";
 
 if (!dev) {
   app.disable("x-powered-by");
-
-  app.use(express.static(path.resolve(__dirname, "build")));
-
   app.use(
     cors({
       origin: ["https://why-is-coin.herokuapp.com/"],
