@@ -16,7 +16,7 @@ if (!dev) {
   app.disable("x-powered-by");
   app.use(
     cors({
-      origin: ["https://why-is-coin.herokuapp.com"],
+      origin: ["herokuapp.com"],
     })
   );
 } else {
