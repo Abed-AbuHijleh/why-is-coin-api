@@ -13,10 +13,11 @@ const app = express();
 const dev = app.get("env") !== "production";
 
 if (!dev) {
+  console.log("hello");
   app.disable("x-powered-by");
   app.use(
     cors({
-      origin: ["herokuapp.com"],
+      origin: ["https://why-is-coin.herokuapp.com"],
     })
   );
 } else {
