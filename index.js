@@ -3,6 +3,7 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+const { response } = require("express");
 
 // App Vars
 
@@ -13,7 +14,6 @@ const app = express();
 const dev = app.get("env") !== "production";
 
 if (!dev) {
-  console.log("hello");
   app.disable("x-powered-by");
   app.use(
     cors({
