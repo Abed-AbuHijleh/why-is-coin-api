@@ -3,7 +3,6 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
-const { response } = require("express");
 
 // App Vars
 
@@ -17,7 +16,7 @@ if (!dev) {
   app.disable("x-powered-by");
   app.use(
     cors({
-      origin: ["https://why-is-coin.herokuapp.com/"],
+      origin: ["https://why-is-coin.herokuapp.com"],
     })
   );
 } else {
