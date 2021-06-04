@@ -218,7 +218,7 @@ const getNews = async (keyword) => {
     let url =
       "https://newsapi.org/v2/everything?language=en&pageSize=100&sortBy=publishedAt&domains=abcnews.go.com,afr.com,axios.com,bbc.co.uk/news,bloomberg.com,cbc.ca/news,cbsnews.com,us.cnn.com,ccn.com,business.financialpost.com,fortune.com,foxnews.com,news.google.com,news.ycombinator.com,msnbc.com,nationalreview.com/,nbcnews.com,nymag.com";
     url += "&q=" + keyword;
-    url += "&from=" + startDate;
+    url += "&from=" + startDate.toISOString();
     const response = await axios.get(url, {
       headers: {
         "X-Api-Key": newsHeaderToken,
