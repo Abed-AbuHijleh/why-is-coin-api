@@ -42,7 +42,7 @@ const vader = require("vader-sentiment");
 // Oldest date
 
 let startDate = new Date();
-startDate.setDate(startDate.getDate() - 5);
+startDate.setDate(startDate.getDate() - 1);
 
 // save
 
@@ -216,8 +216,9 @@ const filterCmcTickerResponse = (data) => {
 const getNews = async (keyword) => {
   try {
     let url =
-      "https://newsapi.org/v2/everything?language=en&pageSize=100&sortBy=publishedAt&domains=abcnews.go.com,afr.com,axios.com,bbc.co.uk/news,bloomberg.com,cbc.ca/news,cbsnews.com,us.cnn.com,ccn.com,business.financialpost.com,fortune.com,foxnews.com,news.google.com,news.ycombinator.com,msnbc.com,nationalreview.com/,nbcnews.com,nymag.com";
-    url += "&q=" + keyword;
+      "https://newsapi.org/v2/everything?language=en&pageSize=100&sortBy=relevancy&domains=abcnews.go.com,afr.com,axios.com,bbc.co.uk/news,bloomberg.com,cbc.ca/news,cbsnews.com,us.cnn.com,ccn.com,business.financialpost.com,fortune.com,foxnews.com,news.google.com,news.ycombinator.com,msnbc.com,nationalreview.com/,nbcnews.com,nymag.com";
+    url += "&qInTitle=" + keyword;
+    url += "&q=+" + keyword + " OR crypto";
     url += "&from=" + startDate.toISOString();
     const response = await axios.get(url, {
       headers: {
@@ -239,8 +240,9 @@ const getNewsSentiment = (data, delta) => {
         data.articles.map((article) => {
           articleCount++;
           sentimentCount += activationFuncInv(
-            vader.SentimentIntensityAnalyzer.polarity_scores(article.content)
-              .compound
+            vader.SentimentIntensityAnalyzer.polarity_scores(
+              article.description + " " + article.content
+            ).compound
           );
           return {
             source: article.source.name,
@@ -250,10 +252,11 @@ const getNewsSentiment = (data, delta) => {
             url: article.url,
             image: article.urlToImage,
             date: article.publishedAt,
-            //content: article.content,
+            content: article.content,
             sentiment:
-              vader.SentimentIntensityAnalyzer.polarity_scores(article.content)
-                .compound * 100,
+              vader.SentimentIntensityAnalyzer.polarity_scores(
+                article.description + " " + article.content
+              ).compound * 100,
           };
         }),
         delta
