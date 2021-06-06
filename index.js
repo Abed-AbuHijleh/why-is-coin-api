@@ -42,7 +42,7 @@ const vader = require("vader-sentiment");
 // Oldest date
 
 let startDate = new Date();
-startDate.setDate(startDate.getDate() - 1);
+startDate.setDate(startDate.getDate() - 1.5);
 
 // save
 
