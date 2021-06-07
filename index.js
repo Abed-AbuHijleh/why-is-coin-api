@@ -274,7 +274,8 @@ const getNewsSentiment = (data, delta) => {
 const getTwitter = async (keyword) => {
   try {
     let url = "https://api.twitter.com/2/tweets/search/recent?&max_results=100";
-    url += "&query=" + keyword;
+    url +=
+      "&query=" + keyword + ' NOT %23"' + keyword + '" -is:retweet lang:en';
     url += "&start_time=" + startDate.toISOString();
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${twitterBearerToken}` },
