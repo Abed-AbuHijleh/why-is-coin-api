@@ -274,8 +274,19 @@ const getNewsSentiment = (data, delta) => {
 const getTwitter = async (keyword) => {
   try {
     let url = "https://api.twitter.com/2/tweets/search/recent?&max_results=100";
-    url +=
-      "&query=" + keyword + ' NOT %23"' + keyword + '" -is:retweet lang:en';
+    url += "&query=" + keyword + " %23" + keyword + " -is:retweet lang:en";
+    if (keyword.toUpperCase() !== "BITCOIN") {
+      url += " -#bitcoin";
+    }
+    if (keyword.toUpperCase() !== "DOGECOIN") {
+      url += " -#dogecoin";
+    }
+    if (keyword.toUpperCase() !== "ETHEREUM") {
+      url += " -#ethereum";
+    }
+    if (keyword.toUpperCase() !== "CARDANO") {
+      url += " -#cardano";
+    }
     url += "&start_time=" + startDate.toISOString();
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${twitterBearerToken}` },
