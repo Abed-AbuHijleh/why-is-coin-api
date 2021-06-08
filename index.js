@@ -281,16 +281,16 @@ const getTwitter = async (keyword) => {
       keyword +
       " lang:en -is:retweet -%23crypto -%23cryptocurrency";
     if (keyword.toUpperCase() !== "BITCOIN") {
-      url += " -%23bitcoin";
+      url += " -%23bitcoin -%23btc";
     }
     if (keyword.toUpperCase() !== "DOGECOIN") {
-      url += " -%23dogecoin";
+      url += " -%23dogecoin -%23doge";
     }
     if (keyword.toUpperCase() !== "ETHEREUM") {
-      url += " -%23ethereum";
+      url += " -%23ethereum -%23eth";
     }
     if (keyword.toUpperCase() !== "CARDANO") {
-      url += " -%23cardano";
+      url += " -%23cardano -%23ada";
     }
     url += "&start_time=" + startDate.toISOString();
 
