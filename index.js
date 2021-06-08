@@ -273,7 +273,8 @@ const getNewsSentiment = (data, delta) => {
 
 const getTwitter = async (keyword) => {
   try {
-    let url = "https://api.twitter.com/2/tweets/search/recent?&max_results=100";
+    let url =
+      "https://api.twitter.com/2/tweets/search/recent?&max_results=100 -%23crypto -%23cryptocurrency";
     url += "&query=" + keyword + " %23" + keyword + " -is:retweet lang:en";
     if (keyword.toUpperCase() !== "BITCOIN") {
       url += " -%23bitcoin";
@@ -288,7 +289,7 @@ const getTwitter = async (keyword) => {
       url += " -%23cardano";
     }
     url += "&start_time=" + startDate.toISOString();
-    console.log(url);
+
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${twitterBearerToken}` },
     });
