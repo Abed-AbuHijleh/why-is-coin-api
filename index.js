@@ -273,9 +273,13 @@ const getNewsSentiment = (data, delta) => {
 
 const getTwitter = async (keyword) => {
   try {
-    let url =
-      "https://api.twitter.com/2/tweets/search/recent?&max_results=100 -%23crypto -%23cryptocurrency";
-    url += "&query=" + keyword + " %23" + keyword + " -is:retweet lang:en";
+    let url = "https://api.twitter.com/2/tweets/search/recent?&max_results=100";
+    url +=
+      "&query=" +
+      keyword +
+      " %23" +
+      keyword +
+      " lang:en -is:retweet -%23crypto -%23cryptocurrency";
     if (keyword.toUpperCase() !== "BITCOIN") {
       url += " -%23bitcoin";
     }
