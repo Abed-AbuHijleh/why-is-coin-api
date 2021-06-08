@@ -276,18 +276,19 @@ const getTwitter = async (keyword) => {
     let url = "https://api.twitter.com/2/tweets/search/recent?&max_results=100";
     url += "&query=" + keyword + " %23" + keyword + " -is:retweet lang:en";
     if (keyword.toUpperCase() !== "BITCOIN") {
-      url += " -#bitcoin";
+      url += " -%23bitcoin";
     }
     if (keyword.toUpperCase() !== "DOGECOIN") {
-      url += " -#dogecoin";
+      url += " -%23dogecoin";
     }
     if (keyword.toUpperCase() !== "ETHEREUM") {
-      url += " -#ethereum";
+      url += " -%23ethereum";
     }
     if (keyword.toUpperCase() !== "CARDANO") {
-      url += " -#cardano";
+      url += " -%23cardano";
     }
     url += "&start_time=" + startDate.toISOString();
+    console.log(url);
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${twitterBearerToken}` },
     });
