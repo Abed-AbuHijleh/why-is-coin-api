@@ -142,6 +142,20 @@ const filterCmcLatestResponse = (data) => {
       },
       {
         data: data.data.map((coin) => {
+          let calculatedSentiment;
+          try {
+            calculatedSentiment =
+              activationFunc(
+                activationFuncInv(
+                  newsData[coin.name].data.news.sentiment / 100
+                ) +
+                  activationFuncInv(
+                    newsData[coin.name].data.twitter.sentiment / 100
+                  )
+              ) * 100;
+          } catch (e) {
+            calculatedSentiment = 0;
+          }
           return {
             id: coin.id,
             rank: coin.cmc_rank,
@@ -151,6 +165,7 @@ const filterCmcLatestResponse = (data) => {
             pc_hour: coin.quote.USD.percent_change_1h,
             pc_day: coin.quote.USD.percent_change_24h,
             pc_week: coin.quote.USD.percent_change_7d,
+            sentiment: calculatedSentiment,
           };
         }),
       },
